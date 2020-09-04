@@ -1,4 +1,4 @@
-package com.artefact.validation;
+package com.github.hsoj48.validation;
 
 import java.util.Collection;
 import java.util.List;

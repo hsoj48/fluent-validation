@@ -1,4 +1,4 @@
-package com.artefact.validation;
+package com.github.hsoj48.validation;
 
 import java.util.List;
 import java.util.regex.Pattern;

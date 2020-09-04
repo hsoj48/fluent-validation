@@ -1,4 +1,4 @@
-package com.artefact.validation;
+package com.github.hsoj48.validation;
 
 public abstract class AbstractValidator<T> implements Validator<T> {
 
