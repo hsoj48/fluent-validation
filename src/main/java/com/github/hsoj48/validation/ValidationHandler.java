@@ -1,5 +1,6 @@
 package com.github.hsoj48.validation;
 
+import java.time.Instant;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -25,6 +26,8 @@ public interface ValidationHandler {
     StringFieldValidator requireThat(List<String> fieldNames, String fieldValue);
     DateFieldValidator requireThat(String fieldName, Date fieldValue);
     DateFieldValidator requireThat(List<String> fieldNames, Date fieldValue);
+    InstantFieldValidator requireThat(String fieldName, Instant fieldValue);
+    InstantFieldValidator requireThat(List<String> fieldNames, Instant fieldValue);
     <T> CollectionFieldValidator<T> requireThat(String fieldName, Collection<T> fieldValue);
     <T> CollectionFieldValidator<T> requireThat(List<String> fieldNames, Collection<T> fieldValue);
     <T> GenericFieldValidator<T> requireThat(String fieldName, T fieldValue);

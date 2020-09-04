@@ -1,5 +1,6 @@
 package com.github.hsoj48.validation;
 
+import java.time.Instant;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -94,6 +95,16 @@ public class DefaultValidationHandler implements ValidationHandler {
     @Override
     public DateFieldValidator requireThat(List<String> fieldNames, Date fieldValue) {
         return new DateFieldValidator(this, fieldNames, fieldValue);
+    }
+
+    @Override
+    public InstantFieldValidator requireThat(String fieldName, Instant fieldValue) {
+        return requireThat(Collections.singletonList(fieldName), fieldValue);
+    }
+
+    @Override
+    public InstantFieldValidator requireThat(List<String> fieldNames, Instant fieldValue) {
+        return new InstantFieldValidator(this, fieldNames, fieldValue);
     }
 
     @Override
