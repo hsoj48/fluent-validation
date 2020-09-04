@@ -14,7 +14,7 @@ public class GenericFieldValidatorTest {
 
     @Before
     public void init() {
-        sut_ValidationHandler = new DefaultValidationHandler();
+        sut_ValidationHandler = new DefaultValidationHandler.Factory().newInstance();
     }
 
     @Test
@@ -34,77 +34,77 @@ public class GenericFieldValidatorTest {
 
     @Test
     public void testInteger_AllNull_ProducesSafeErrors() {
-        sut_ValidationHandler = new DefaultValidationHandler();
+        sut_ValidationHandler = new DefaultValidationHandler.Factory().newInstance();
         sut_ValidationHandler.requireThat("testInteger", (Integer) null).isPresent();
         assertTrue(sut_ValidationHandler.hasErrors());
 
-        sut_ValidationHandler = new DefaultValidationHandler();
+        sut_ValidationHandler = new DefaultValidationHandler.Factory().newInstance();
         sut_ValidationHandler.requireThat("testInteger", (Integer) null).matches(123);
         assertFalse(sut_ValidationHandler.hasErrors());
 
-        sut_ValidationHandler = new DefaultValidationHandler();
+        sut_ValidationHandler = new DefaultValidationHandler.Factory().newInstance();
         sut_ValidationHandler.requireThat("testInteger", (Integer) null).matchesOneOf(123, 456);
         assertFalse(sut_ValidationHandler.hasErrors());
 
-        sut_ValidationHandler = new DefaultValidationHandler();
+        sut_ValidationHandler = new DefaultValidationHandler.Factory().newInstance();
         sut_ValidationHandler.requireThat("testInteger", (Integer) null).matchesNoneOf(111, 222, null);
         assertFalse(sut_ValidationHandler.hasErrors());
 
-        sut_ValidationHandler = new DefaultValidationHandler();
+        sut_ValidationHandler = new DefaultValidationHandler.Factory().newInstance();
         sut_ValidationHandler.requireThat("testInteger", (Integer) null).isTrue(true);
         assertFalse(sut_ValidationHandler.hasErrors());
 
-        sut_ValidationHandler = new DefaultValidationHandler();
+        sut_ValidationHandler = new DefaultValidationHandler.Factory().newInstance();
         sut_ValidationHandler.requireThat("testInteger", (Integer) null).isTrue(o -> true);
         assertFalse(sut_ValidationHandler.hasErrors());
 
-        sut_ValidationHandler = new DefaultValidationHandler();
+        sut_ValidationHandler = new DefaultValidationHandler.Factory().newInstance();
         sut_ValidationHandler.requireThat("testInteger", (Integer) null).isFalse(false);
         assertFalse(sut_ValidationHandler.hasErrors());
 
-        sut_ValidationHandler = new DefaultValidationHandler();
+        sut_ValidationHandler = new DefaultValidationHandler.Factory().newInstance();
         sut_ValidationHandler.requireThat("testInteger", (Integer) null).isFalse(o -> false);
         assertFalse(sut_ValidationHandler.hasErrors());
     }
 
     @Test
     public void testInteger_AllFailures_ProducesSafeErrors() {
-        sut_ValidationHandler = new DefaultValidationHandler();
+        sut_ValidationHandler = new DefaultValidationHandler.Factory().newInstance();
         sut_ValidationHandler.requireThat("testInteger", (Integer) null).isPresent();
         assertTrue(sut_ValidationHandler.hasErrors());
         assertEquals("Invalid testInteger", sut_ValidationHandler.getErrorMessagesJoined());
 
-        sut_ValidationHandler = new DefaultValidationHandler();
+        sut_ValidationHandler = new DefaultValidationHandler.Factory().newInstance();
         sut_ValidationHandler.requireThat("testInteger", 234).matches(123);
         assertTrue(sut_ValidationHandler.hasErrors());
         assertEquals("Invalid testInteger", sut_ValidationHandler.getErrorMessagesJoined());
 
-        sut_ValidationHandler = new DefaultValidationHandler();
+        sut_ValidationHandler = new DefaultValidationHandler.Factory().newInstance();
         sut_ValidationHandler.requireThat("testInteger", 234).matchesOneOf(123, 456);
         assertTrue(sut_ValidationHandler.hasErrors());
         assertEquals("Invalid testInteger", sut_ValidationHandler.getErrorMessagesJoined());
 
-        sut_ValidationHandler = new DefaultValidationHandler();
+        sut_ValidationHandler = new DefaultValidationHandler.Factory().newInstance();
         sut_ValidationHandler.requireThat("testInteger", 234).matchesNoneOf(111, 234, null);
         assertTrue(sut_ValidationHandler.hasErrors());
         assertEquals("Invalid testInteger", sut_ValidationHandler.getErrorMessagesJoined());
 
-        sut_ValidationHandler = new DefaultValidationHandler();
+        sut_ValidationHandler = new DefaultValidationHandler.Factory().newInstance();
         sut_ValidationHandler.requireThat("testInteger", 234).isTrue(false);
         assertTrue(sut_ValidationHandler.hasErrors());
         assertEquals("Invalid testInteger", sut_ValidationHandler.getErrorMessagesJoined());
 
-        sut_ValidationHandler = new DefaultValidationHandler();
+        sut_ValidationHandler = new DefaultValidationHandler.Factory().newInstance();
         sut_ValidationHandler.requireThat("testInteger", 234).isTrue(o -> false);
         assertTrue(sut_ValidationHandler.hasErrors());
         assertEquals("Invalid testInteger", sut_ValidationHandler.getErrorMessagesJoined());
 
-        sut_ValidationHandler = new DefaultValidationHandler();
+        sut_ValidationHandler = new DefaultValidationHandler.Factory().newInstance();
         sut_ValidationHandler.requireThat("testInteger", 234).isFalse(true);
         assertTrue(sut_ValidationHandler.hasErrors());
         assertEquals("Invalid testInteger", sut_ValidationHandler.getErrorMessagesJoined());
 
-        sut_ValidationHandler = new DefaultValidationHandler();
+        sut_ValidationHandler = new DefaultValidationHandler.Factory().newInstance();
         sut_ValidationHandler.requireThat("testInteger", 234).isFalse(o -> true);
         assertTrue(sut_ValidationHandler.hasErrors());
         assertEquals("Invalid testInteger", sut_ValidationHandler.getErrorMessagesJoined());

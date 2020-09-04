@@ -1,10 +1,14 @@
 package com.github.hsoj48.validation;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import java.time.Instant;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class DefaultValidationHandler implements ValidationHandler {
 
     private static final String DEFAULT_FIELD_ERROR_PREFIX = "Invalid ";
@@ -125,6 +129,13 @@ public class DefaultValidationHandler implements ValidationHandler {
     @Override
     public <T> GenericFieldValidator<T> requireThat(List<String> fieldNames, T fieldValue) {
         return new GenericFieldValidator<>(this, fieldNames, fieldValue);
+    }
+
+    static class Factory implements ValidationHandlerFactory<DefaultValidationHandler> {
+        @Override
+        public DefaultValidationHandler newInstance() {
+            return new DefaultValidationHandler();
+        }
     }
 
 }

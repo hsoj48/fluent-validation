@@ -16,7 +16,7 @@ public class InstantFieldValidatorTest {
 
     @Before
     public void init() {
-        sut_ValidationHandler = new DefaultValidationHandler();
+        sut_ValidationHandler = new DefaultValidationHandler.Factory().newInstance();
     }
 
     @Test
@@ -59,22 +59,22 @@ public class InstantFieldValidatorTest {
 
     @Test
     public void testDate_AllFailures_ProducesSafeErrors() {
-        sut_ValidationHandler = new DefaultValidationHandler();
+        sut_ValidationHandler = new DefaultValidationHandler.Factory().newInstance();
         sut_ValidationHandler.requireThat("testDate", Instant.ofEpochMilli(System.currentTimeMillis() + 10000)).isBeforeNow();
         assertTrue(sut_ValidationHandler.hasErrors());
         assertEquals("Invalid testDate", sut_ValidationHandler.getErrorMessagesJoined());
 
-        sut_ValidationHandler = new DefaultValidationHandler();
+        sut_ValidationHandler = new DefaultValidationHandler.Factory().newInstance();
         sut_ValidationHandler.requireThat("testDate", Instant.ofEpochMilli(System.currentTimeMillis() + 10000)).isBefore(Instant.ofEpochMilli(1));
         assertTrue(sut_ValidationHandler.hasErrors());
         assertEquals("Invalid testDate", sut_ValidationHandler.getErrorMessagesJoined());
 
-        sut_ValidationHandler = new DefaultValidationHandler();
+        sut_ValidationHandler = new DefaultValidationHandler.Factory().newInstance();
         sut_ValidationHandler.requireThat("testDate", Instant.ofEpochMilli(0)).isAfterNow();
         assertTrue(sut_ValidationHandler.hasErrors());
         assertEquals("Invalid testDate", sut_ValidationHandler.getErrorMessagesJoined());
 
-        sut_ValidationHandler = new DefaultValidationHandler();
+        sut_ValidationHandler = new DefaultValidationHandler.Factory().newInstance();
 
         sut_ValidationHandler.requireThat("testDate", Instant.ofEpochMilli(0)).isAfter(Instant.now());
         assertTrue(sut_ValidationHandler.hasErrors());

@@ -18,7 +18,7 @@ public class CollectionFieldValidatorTest {
 
     @Before
     public void init() {
-        sut_ValidationHandler = new DefaultValidationHandler();
+        sut_ValidationHandler = new DefaultValidationHandler.Factory().newInstance();
     }
 
     @Test
@@ -54,22 +54,22 @@ public class CollectionFieldValidatorTest {
 
     @Test
     public void testCollection_AllFailures_ProducesSafeErrors() {
-        sut_ValidationHandler = new DefaultValidationHandler();
+        sut_ValidationHandler = new DefaultValidationHandler.Factory().newInstance();
         sut_ValidationHandler.requireThat("testCollection", Arrays.asList("bacon", "eggs")).isEmpty();
         assertTrue(sut_ValidationHandler.hasErrors());
         assertEquals("Invalid testCollection", sut_ValidationHandler.getErrorMessagesJoined());
 
-        sut_ValidationHandler = new DefaultValidationHandler();
+        sut_ValidationHandler = new DefaultValidationHandler.Factory().newInstance();
         sut_ValidationHandler.requireThat("testCollection", Collections.emptyList()).isNotEmpty();
         assertTrue(sut_ValidationHandler.hasErrors());
         assertEquals("Invalid testCollection", sut_ValidationHandler.getErrorMessagesJoined());
 
-        sut_ValidationHandler = new DefaultValidationHandler();
+        sut_ValidationHandler = new DefaultValidationHandler.Factory().newInstance();
         sut_ValidationHandler.requireThat("testCollection", Arrays.asList("bacon", "eggs")).hasLength(3);
         assertTrue(sut_ValidationHandler.hasErrors());
         assertEquals("Invalid testCollection", sut_ValidationHandler.getErrorMessagesJoined());
 
-        sut_ValidationHandler = new DefaultValidationHandler();
+        sut_ValidationHandler = new DefaultValidationHandler.Factory().newInstance();
 
         sut_ValidationHandler.requireThat("testCollection", Arrays.asList("bacon", "eggs")).noneMatch("bacon");
         assertTrue(sut_ValidationHandler.hasErrors());
