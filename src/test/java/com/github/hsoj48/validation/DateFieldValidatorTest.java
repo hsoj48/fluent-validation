@@ -49,6 +49,15 @@ public class DateFieldValidatorTest {
     }
 
     @Test
+    public void testDate_NullInputMethods_HappyPath() {
+        sut_ValidationHandler.requireThat("testDate", new Date(0))
+                .isBefore(null)
+                .isAfter(null);
+
+        assertTrue(sut_ValidationHandler.hasErrors());
+    }
+
+    @Test
     public void testDate_AllFailures_ProducesSafeErrors() {
         sut_ValidationHandler = new DefaultValidationHandler();
         sut_ValidationHandler.requireThat("testDate", new Date(System.currentTimeMillis() + 10000)).isBeforeNow();

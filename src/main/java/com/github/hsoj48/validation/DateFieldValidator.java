@@ -18,11 +18,11 @@ public class DateFieldValidator extends AbstractFieldValidator<Date, DateFieldVa
     }
 
     public DateFieldValidator isBefore(Date other) {
-        return isTrue(o -> other == null || o.before(other));
+        return isTrue(o -> other != null && o.before(other));
     }
 
     public DateFieldValidator isAfter(Date other) {
-        return isTrue(o -> other == null || o.after(other));
+        return isTrue(o -> other != null && o.after(other));
     }
 
     @Override
