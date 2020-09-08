@@ -48,27 +48,15 @@ public abstract class AbstractFieldValidator<T, U extends AbstractFieldValidator
     }
 
     public U isTrue(Predicate<T> predicate) {
-        if (value != null) {
-            return isTrue(predicate.test(value));
-        } else {
-            return getThis();
-        }
+        return isTrue(value == null || predicate.test(value));
     }
 
     public U isFalse(boolean test) {
-        if (test) {
-            fieldNames.forEach(handler::addFieldError);
-        }
-
-        return getThis();
+        return isTrue(!test);
     }
 
     public U isFalse(Predicate<T> predicate) {
-        if (value != null) {
-            return isFalse(predicate.test(value));
-        } else {
-            return getThis();
-        }
+        return isTrue(value == null || predicate.negate().test(value));
     }
 
     protected abstract U getThis();
